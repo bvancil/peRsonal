@@ -9,15 +9,17 @@
 #' @export
 #'
 #' @examples
-#' library(extrafont)
-#' windowsFonts()
-#' extrafont::font_import()
-#' extrafont::loadfonts(device="win")
-#' windowsFonts()
-#' ggplot2::ggplot(data = iris, ggplot2::aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
-#'   ggplot2::geom_point() +
-#'   ggplot2::labs(title = 'Iris setosa is separable, but versicolor and verginica are not.') +
-#'   theme_modern()
+#' if (interactive()) {
+#'   library(extrafont)
+#'   windowsFonts()
+#'   extrafont::font_import()
+#'   extrafont::loadfonts(device="win")
+#'   windowsFonts()
+#'   ggplot2::ggplot(data = iris, ggplot2::aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+#'     ggplot2::geom_point() +
+#'     ggplot2::labs(title = 'Iris setosa is separable, but versicolor and verginica are not.') +
+#'     theme_modern()
+#' }
 theme_modern <- function(
   base_size = 11, base_family = "Lucida Sans Unicode", base_line_size = base_size/22,
   base_rect_size = base_size/22
@@ -73,3 +75,4 @@ theme_modern <- function(
       complete = TRUE
     )
 }
+
