@@ -1,0 +1,25 @@
+Package: peRsonal
+Title: R package of personally useful functions
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Brian",
+           family = "Vancil",
+           role = c("aut", "cre"),
+           email = "Brian@Vancil.name")
+Description: Functions not yet deserving of a dedicated
+    thematic library.
+License: GPL (>= 3) | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat,
+    covr
+Imports: 
+    ggplot2,
+    magrittr,
+    purrr,
+    tibble,
+    dplyr,
+    extrafont
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.0
