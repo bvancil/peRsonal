@@ -51,6 +51,37 @@ generate_groups <- function(num_samples, num_groups, distribution = stats::runif
   )
 }
 
+#' Stratify random values by group
+#'
+#' @param num_groups natural number, number of group values
+#'   to create
+#' @param groups vector of natural numbers of at most
+#'   magnitude \code{num_groups}
+#' @param distribution random value function that takes at
+#'   least one parameter, the number of values to return
+#' @param ... additional parameters for \code{distribution}
+#'
+#' @return a vector of random values of length
+#'   \code{length(groups)} with a functional dependence on
+#'   \code{groups}
+#' @export
+#'
+#' @examples
+#' num_groups <- 5
+#' num_samples <- 20
+#' groups <- generate_groups(num_samples, num_groups)
+#' groups
+#' v1 <- stratify_by_group(num_groups, groups)
+#' v1
+#' table(groups, v1)
+#' v2 <- stratify_by_group(num_groups, groups, distribution = function(n) {base::sample.int(2, size = n, replace = TRUE)})
+#' v2
+#' table(groups, v2)
+stratify_by_group <- function(num_groups, groups, distribution = stats::rnorm, ...) {
+  group_values <- distribution(num_groups, ...)
+  return(group_values[groups])
+}
+
 #' Generate a tibble of ranked outcomes
 #'
 #' @param outcomes numeric

@@ -25,6 +25,25 @@ testthat::test_that('generate_groups generates valid groups', {
   testthat::expect_true(base::all(group_samples %in% group_levels))
 })
 
+testthat::test_that('stratify_by_group has a functional relationship with group', {
+  num_samples <- reasonable_replication()
+  num_groups <- smallish_natural_number()
+  group_samples <- generate_groups(num_samples, num_groups)
+  group_values <- stratify_by_group(num_groups, group_samples)
+  testthat::expect_length(group_values, num_samples)
+  pairs <- tibble::tibble(
+    group = group_samples,
+    value = group_values
+  )
+  values_per_group <- pairs %>%
+    dplyr::group_by(group) %>%
+    dplyr::distinct() %>%
+    dplyr::tally() %>%
+    dplyr::ungroup() %>%
+    dplyr::pull(n)
+  testthat::expect_equal(values_per_group, base::rep.int(1L, length(values_per_group)))
+})
+
 testthat::test_that('rank_outcomes generates a proper data frame', {
   num_outcomes <- smallish_natural_number()
   outcomes <- stats::rnorm(num_outcomes)
@@ -43,3 +62,4 @@ testthat::test_that('replicate_df generates a proper data frame', {
   testthat::expect_equal(base::nrow(df), num_replications * num1)
   testthat::expect_equal(df$replication, base::rep(base::seq_len(num_replications), each = num1))
 })
+
